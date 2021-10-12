@@ -7,6 +7,40 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+
+.st {
+	display: flex;
+	justify-content: space-between;
+}
+
+.btn {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.btn_json {
+	width: 40%;
+	border: none;
+	padding: 20px;
+	background-color: green;
+	color: white;
+	border-radius: 12px ;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.btn_server {
+	width: 40%;
+	border: none;
+	padding: 20px;
+	background-color: rgb(25, 95, 77);
+	color: white;
+	border-radius: 12px ;
+	font-size: 16px;
+	cursor: pointer;
+}
+
 .e-grid .e-headercell,
 .e-grid .e-detailheadercell {
 	background-color: whitesmoke;
