@@ -1,0 +1,38 @@
+export let data = [
+	{
+		BB: 'AAAAA',
+		Model: 'AAA',
+		Developer: 'BB',
+		ReleaseDate: new Date('2009-03-31T18:30:00.000Z'),
+		AndroidVersion: 'Android 1.5',
+		Cupcake: 'SNO',
+		SNO: 1,
+	},
+	{
+		BB: 'AAAAA',
+		Model: 'BBB',
+		Developer: 'Yassine',
+		ReleaseDate: new Date('2009-03-31T18:30:00.000Z'),
+		AndroidVersion: 'Android 1.5',
+		Cupcake: 'SNO',
+		SNO: 1,
+	},
+	{
+		BB: 'AAAAA',
+		Model: 'CCC',
+		Developer: 'Alex',
+		ReleaseDate: new Date('2009-03-31T18:30:00.000Z'),
+		AndroidVersion: 'Android 1.5',
+		Cupcake: 'SNO',
+		SNO: 1,
+	},
+	{
+		BB: 'AAAAA',
+		Model: 'Samsung Galaxy',
+		Developer: 'Samsung Electronics',
+		ReleaseDate: new Date('2009-03-31T18:30:00.000Z'),
+		AndroidVersion: 'Android 1.5',
+		Cupcake: 'SNO',
+		SNO: 1,
+	},
+];
