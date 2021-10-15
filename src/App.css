@@ -41,3 +41,21 @@ body {
 		transform: rotate(360deg);
 	}
 }
+
+.light-background {
+	background-color: whitesmoke;
+	color: black;
+}
+.black-background {
+	background-color: black;
+	color: whitesmoke;
+}
+
+.e-grid .e-headercell.customcss {
+	background-color: #2382c3;
+	color: white;
+}
+.e-grid .e-headercell.customcss1 {
+	background-color: #d12f60;
+	color: white;
+}

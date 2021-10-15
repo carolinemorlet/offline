@@ -7,10 +7,38 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.side-bar {
+	height: 100% !important;
+	display: flex;
+	flex-direction: column;
+	border-right: 1px solid;
+	border-radius: 0;
+	border-color: rgba(64, 194, 133, 0.693);
+	background-color: rgb(255, 255, 255);
+	transition: 0.8s ease;
+}
+
+.toggle-menu {
+	height: 50px;
+	border-top-right-radius: 10rem;
+	border-bottom-right-radius: 9rem;
+	width: 10px;
+	position: absolute;
+	outline: none;
+	z-index: 1;
+	background-color: rgba(64, 194, 133, 0.693);
+	border-color: rgba(64, 194, 133, 0.693);
+	border-left: 0;
+}
+
+.e-rowcell {
+	text-align: inherit !important;
+}
 
 .st {
 	display: flex;
 	justify-content: space-between;
+	height: 50px;
 }
 
 .btn {
@@ -23,9 +51,9 @@ body {
 	width: 40%;
 	border: none;
 	padding: 20px;
-	background-color: green;
+
 	color: white;
-	border-radius: 12px ;
+	border-radius: 12px;
 	font-size: 16px;
 	cursor: pointer;
 }
@@ -34,9 +62,9 @@ body {
 	width: 40%;
 	border: none;
 	padding: 20px;
-	background-color: rgb(25, 95, 77);
+
 	color: white;
-	border-radius: 12px ;
+	border-radius: 12px;
 	font-size: 16px;
 	cursor: pointer;
 }

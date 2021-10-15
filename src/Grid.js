@@ -13,11 +13,13 @@ import {
 	ColumnDirective,
 	ColumnsDirective,
 } from '@syncfusion/ej2-react-grids';
+
 import { useState } from 'react';
+
 import { data } from './datasource';
 import useWindowSize from './useWindowSize';
 
-const Grid = () => {
+const Grid = ({ themeReducer, colorMode }) => {
 	const [width] = useWindowSize();
 	const [datas, setDatas] = useState(data);
 
@@ -37,18 +39,14 @@ const Grid = () => {
 		'ColumnChooser',
 		'Search',
 	];
-	//const validationRule = { required: true };
-	// const orderidRules = { required: true, number: true };
+
 	const filterOptions = { type: 'Excel' };
-	//const grid = GridComponent;
+
 	const load = () => {
 		// let adaptiveDlgTarget =
 		// 	document.getElementsByClassName('e-mobile-content')[0];
 	};
-	// const menuFilter = { type: 'Menu' };
-	// const checkboxFilter = { type: 'CheckBox' };
 
-	// Grid’s actionComplete event handler
 	const actionComplete = (args) => {
 		if (args.requestType === 'save' || args.requestType === 'delete') {
 			// Condition executes on Grid Add/Edit/Delete success
@@ -58,7 +56,7 @@ const Grid = () => {
 	};
 
 	const downloadFile = async () => {
-		const fileName = 'file';
+		const fileName = 'ExportedData';
 		const json = JSON.stringify(datas);
 		const blob = new Blob([json], { type: 'application/json' });
 		const href = await URL.createObjectURL(blob);
@@ -68,6 +66,11 @@ const Grid = () => {
 		document.body.appendChild(link);
 		link.click();
 		document.body.removeChild(link);
+	};
+
+	const pageOptions = {
+		pageSize: 8,
+		pageSizes: true,
 	};
 
 	return (
@@ -87,88 +90,41 @@ const Grid = () => {
 						allowGrouping={true}
 						allowReordering={true}
 						allowResizing={true}
-						enablePersistence={true}
+						//enablePersistence={true}
 						showColumnChooser={true}
 						filterSettings={filterOptions}
 						toolbar={toolbarOptions}
 						editSettings={editSettings}
 						load={load}
+						pageSettings={pageOptions}
 						enableAdaptiveUI={width < 700 && true}
 						rowRenderingMode={width < 700 && 'Vertical'}
 					>
-						{/* <ColumnsDirective>
-							<ColumnDirective
-								field='SNO'
-								headerText='SNO'
-								width='150'
-								isPrimaryKey={true}
-								//validationRules={orderidRules}
-							></ColumnDirective>
-							<ColumnDirective
-								field='Model'
-								headerText='Model Name'
-								width='200'
-								editType='defaultEdit'
-								//validationRules={validationRule}
-							/>
-
-							<ColumnDirective
-								field='ReleaseDate'
-								headerText='Released Date'
-								// editType='datepickeredit'
-								// type='date'
-								// format='yMMM'
-								width='200'
-							></ColumnDirective>
-							<ColumnDirective
-								field='Developer'
-								headerText='Developer'
-								width='200'
-								//filter={menuFilter}
-								//validationRules={validationRule}
-							></ColumnDirective>
-							<ColumnDirective
-								field='AndroidVersion'
-								headerText='Android Version'
-								width='200'
-								//filter={checkboxFilter}
-								validationRules={validationRule}
-							></ColumnDirective>
-						</ColumnsDirective> */}
 						<ColumnsDirective>
 							<ColumnDirective
 								field='OrderID'
 								headerText='Order ID'
-								width='40'
-								textAlign='Right'
 								isPrimaryKey={true}
 							></ColumnDirective>
 							<ColumnDirective
 								field='CustomerID'
 								headerText='Customer ID'
-								width='40'
-								textAlign='Right'
-								isPrimaryKey={true}
 							></ColumnDirective>
 							<ColumnDirective
 								field='ShipName'
 								headerText='ShipName'
-								width='50'
 							></ColumnDirective>
 							<ColumnDirective
 								field='ShipAddress'
 								headerText='Ship Address'
-								width='50'
 							></ColumnDirective>
 							<ColumnDirective
 								field='ShipCity'
 								headerText='Ship City'
-								width='50'
 							></ColumnDirective>
 							<ColumnDirective
 								field='ShipCountry'
 								headerText='Ship Country'
-								width='50'
 							></ColumnDirective>
 						</ColumnsDirective>
 						<Inject
@@ -187,13 +143,18 @@ const Grid = () => {
 					</GridComponent>
 					<br />
 					<div className='btn'>
-						<button className='btn_json' onClick={downloadFile}>
+						<button
+							className='btn_json'
+							style={{ backgroundColor: colorMode && colorMode.split('-')[2] }}
+							onClick={downloadFile}
+						>
 							Export data as json
 						</button>{' '}
 						<br />
 						<button
 							className='btn_server'
 							onClick={(e) => console.log('Async/Await with Backend')}
+							style={{ backgroundColor: colorMode && colorMode.split('-')[2] }}
 						>
 							Sync with Server
 						</button>
