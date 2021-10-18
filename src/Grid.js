@@ -76,7 +76,7 @@ const Grid = ({ themeReducer, colorMode }) => {
 	return (
 		<div className='e-adaptive-demo e-bigger'>
 			<div className='e-mobile-layout'>
-				<div className='e-mobile-content'>
+				<div className='e-mobile-content' style={{ padding: '15px' }}>
 					<GridComponent
 						actionComplete={actionComplete}
 						ref={(grid) => grid && setDatas(grid?.dataSource)}
