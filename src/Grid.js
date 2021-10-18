@@ -82,7 +82,7 @@ const Grid = ({ themeReducer, colorMode }) => {
 						ref={(grid) => grid && setDatas(grid?.dataSource)}
 						id='adaptivebrowser'
 						dataSource={data}
-						height='100%'
+						//height='100%'
 						width='100%'
 						allowFiltering={true}
 						allowSorting={true}
