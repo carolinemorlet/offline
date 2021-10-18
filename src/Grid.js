@@ -15,6 +15,7 @@ import {
 } from '@syncfusion/ej2-react-grids';
 
 import { useState } from 'react';
+import styled from 'styled-components';
 
 import { data } from './datasource';
 import useWindowSize from './useWindowSize';
@@ -73,11 +74,41 @@ const Grid = ({ themeReducer, colorMode }) => {
 		pageSizes: true,
 	};
 
+	console.log(themeReducer);
+	const GridStyled = styled(GridComponent)`
+		.e-headercell {
+			background-color: ${themeReducer === 'theme-mode-dark' &&
+			'rgb(85 82 82)'};
+			color: ${themeReducer === 'theme-mode-dark' && 'white'};
+		}
+
+		.e-headercell .e-pager {
+			background-color: ${colorMode.split('-')[2]};
+			color: white;
+		}
+		.e-currentitem {
+			background-color: ${colorMode.split('-')[2]};
+			color: white;
+		}
+		.e-headertext {
+			font-size: 14px;
+			color: 'white';
+		}
+		th.e-headercell[aria-sort='descending'] .e-filtermenudiv {
+			color: white;
+		}
+
+		.e-grid .e-headercell,
+		.e-grid .e-detailheadercell {
+			background-color: cyan;
+		}
+	`;
+
 	return (
 		<div className='e-adaptive-demo e-bigger'>
 			<div className='e-mobile-layout'>
-				<div className='e-mobile-content' style={{ padding: '15px' }}>
-					<GridComponent
+				<div className='e-mobile-content' style={{ padding: '4px 12px' }}>
+					<GridStyled
 						actionComplete={actionComplete}
 						ref={(grid) => grid && setDatas(grid?.dataSource)}
 						id='adaptivebrowser'
@@ -140,7 +171,7 @@ const Grid = ({ themeReducer, colorMode }) => {
 								ColumnChooser,
 							]}
 						/>
-					</GridComponent>
+					</GridStyled>
 					<br />
 					<div className='btn'>
 						<button

@@ -20,6 +20,7 @@ function App() {
 			}}
 		>
 			<ThemeMenu />
+
 			<Grid themeReducer={themeReducer} colorMode={colorMode} />
 		</div>
 	);

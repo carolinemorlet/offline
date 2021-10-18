@@ -117,7 +117,8 @@ const ThemeMenu = () => {
 				className='my-btn'
 				onClick={() => setActiveMenu()}
 			>
-				<i className='fa-solid fa-palette'></i>Costumize
+				<i className='fa-solid fa-palette'></i>
+				{'  '} Customize
 			</button>
 			<div ref={menu_ref} className='theme-menu'>
 				<h4>Theme settings</h4>
