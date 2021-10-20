@@ -5,6 +5,7 @@
   "dependencies": {
     "@syncfusion/ej2-react-buttons": "^19.3.44",
     "@syncfusion/ej2-react-grids": "^19.3.44",
+    "@syncfusion/ej2-react-inputs": "^19.3.44",
     "@syncfusion/ej2-react-navigations": "^19.3.45",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",

@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import './App.css';
 import Grid from './Grid';
+import Home from './Home';
 import ThemeMenu from './thememenu/ThemeMenu';
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
 			}}
 		>
 			<ThemeMenu />
-
+			{/* <Home /> */}
 			<Grid themeReducer={themeReducer} colorMode={colorMode} />
 		</div>
 	);

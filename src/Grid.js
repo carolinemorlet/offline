@@ -73,13 +73,10 @@ const Grid = ({ themeReducer, colorMode }) => {
 		pageSize: 8,
 		pageSizes: true,
 	};
-
-	console.log(themeReducer);
 	const GridStyled = styled(GridComponent)`
 		.e-headercell {
-			background-color: ${themeReducer === 'theme-mode-dark' &&
-			'rgb(85 82 82)'};
-			color: ${themeReducer === 'theme-mode-dark' && 'white'};
+			background-color: ${colorMode.split('-')[2]};
+			color: white;
 		}
 
 		.e-headercell .e-pager {
@@ -109,6 +106,7 @@ const Grid = ({ themeReducer, colorMode }) => {
 			<div className='e-mobile-layout'>
 				<div className='e-mobile-content' style={{ padding: '4px 12px' }}>
 					<GridStyled
+						className='Styled'
 						actionComplete={actionComplete}
 						ref={(grid) => grid && setDatas(grid?.dataSource)}
 						id='adaptivebrowser'
