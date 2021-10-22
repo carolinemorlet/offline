@@ -1,33 +1,22 @@
 import React, { useRef, useState, useEffect } from 'react';
 
+import { useDispatch } from 'react-redux';
+import ThemeAction from '../redux/actions/ThemeAction';
+import { ThemeProvider } from 'styled-components';
+import { useDarkMode } from './useDarkMode';
 import {
   MenuTheme,
   CloseMenuTheme,
   CustomizeButton,
   ModeList,
   ContainerMenuTheme,
+  Btn,
 } from '../styledComponents/styled';
-
-import './thememenu.css';
-
-import { useDispatch } from 'react-redux';
-
-import ThemeAction from '../redux/actions/ThemeAction';
-
-const mode_settings = [
-  {
-    id: 'light',
-    name: 'Light',
-    background: 'light-background',
-    class: 'theme-mode-light',
-  },
-  {
-    id: 'dark',
-    name: 'Dark',
-    background: 'dark-background',
-    class: 'theme-mode-dark',
-  },
-];
+import {
+  darkTheme,
+  GlobalStyles,
+  lightTheme,
+} from '../styledComponents/themeStyle';
 
 const color_settings = [
   {
@@ -77,8 +66,10 @@ const clickOutsideRef = (content_ref, toggle_ref) => {
 };
 
 const ThemeMenu = () => {
+  const [currMode, switchTheme] = useDarkMode();
   const menu_ref = useRef(null);
   const menu_toggle_ref = useRef(null);
+  const [currColor, setcurrColor] = useState('blue');
 
   clickOutsideRef(menu_ref, menu_toggle_ref);
 
@@ -86,17 +77,13 @@ const ThemeMenu = () => {
 
   const closeMenu = () => menu_ref.current.classList.remove('active');
 
-  const [currMode, setcurrMode] = useState('light');
-
-  const [currColor, setcurrColor] = useState('blue');
-
   const dispatch = useDispatch();
 
-  const setMode = (mode) => {
-    setcurrMode(mode.id);
-    localStorage.setItem('themeMode', mode.class);
-    dispatch(ThemeAction.setMode(mode.class));
-  };
+  // const setMode = (mode) => {
+  //   setcurrMode(mode.id);
+  //   localStorage.setItem('theme', mode.class);
+  //   dispatch(ThemeAction.setMode(mode.class));
+  // };
 
   const setColor = (color) => {
     setcurrColor(color.id);
@@ -105,65 +92,54 @@ const ThemeMenu = () => {
   };
 
   useEffect(() => {
-    const themeClass = mode_settings.find(
-      (e) => e.class === localStorage.getItem('themeMode', 'theme-mode-light')
-    );
-
     const colorClass = color_settings.find(
-      (e) => e.class === localStorage.getItem('colorMode', 'theme-mode-light')
+      (e) => e.class === localStorage.getItem('colorMode', 'light')
     );
-
-    if (themeClass !== undefined) setcurrMode(themeClass.id);
 
     if (colorClass !== undefined) setcurrColor(colorClass.id);
   }, []);
 
+  // const themeClass = mode_settings.find(
+  //   (e) => e.class === localStorage.getItem('themeMode', 'theme-mode-light')
+  // );
+
   return (
-    <ContainerMenuTheme>
-      <CustomizeButton ref={menu_toggle_ref} onClick={() => setActiveMenu()}>
-        <i className="fa-solid fa-palette"></i>
-      </CustomizeButton>
-      <MenuTheme ref={menu_ref} className="active">
-        <h4>Theme settings</h4>
-        <CloseMenuTheme onClick={() => closeMenu()}>
-          <i className="fa-solid fa-xmark"></i>
-        </CloseMenuTheme>
-        <div className="select">
-          <span>Choose mode</span>
-          <ModeList>
-            {mode_settings.map((item, index) => (
-              <li key={index} onClick={() => setMode(item)}>
-                <div
-                  className={`mode-list__color ${item.background} ${
-                    item.id === currMode ? 'active' : ''
-                  }`}
-                >
-                  <i className="bx bx-check"></i>
-                </div>
-                <span>{item.name}</span>
-              </li>
-            ))}
-          </ModeList>
-        </div>
-        <div className="theme-menu__select">
-          <span>Choose color</span>
-          <ModeList>
-            {color_settings.map((item, index) => (
-              <li key={index} onClick={() => setColor(item)}>
-                <div
-                  className={`mode-list__color ${item.background} ${
-                    item.id === currColor ? 'active' : ''
-                  }`}
-                >
-                  <i className="bx bx-check"></i>
-                </div>
-                <span>{item.name}</span>
-              </li>
-            ))}
-          </ModeList>
-        </div>
-      </MenuTheme>
-    </ContainerMenuTheme>
+    <ThemeProvider theme={currMode === 'light' ? lightTheme : darkTheme}>
+      <GlobalStyles />
+      <ContainerMenuTheme>
+        <CustomizeButton ref={menu_toggle_ref} onClick={() => setActiveMenu()}>
+          <i className="fa-solid fa-palette"></i>
+        </CustomizeButton>
+        <MenuTheme ref={menu_ref} className="active">
+          <h4>Theme settings</h4>
+          <CloseMenuTheme onClick={() => closeMenu()}>
+            <i className="fa-solid fa-xmark"></i>
+          </CloseMenuTheme>
+          <div className="select">
+            <span>Choose mode</span>
+            <h4>{currMode === 'light' ? 'lightTheme' : 'darkTheme'}</h4>
+            <Btn theme={currMode} switchTheme={switchTheme}></Btn>
+          </div>
+          <div className="theme-menu__select">
+            <span>Choose color</span>
+            <ModeList>
+              {color_settings.map((item, index) => (
+                <li key={index} onClick={() => setColor(item)}>
+                  <div
+                    className={`mode-list__color ${item.background} ${
+                      item.id === currColor ? 'active' : ''
+                    }`}
+                  >
+                    <i className="bx bx-check"></i>
+                  </div>
+                  <span>{item.name}</span>
+                </li>
+              ))}
+            </ModeList>
+          </div>
+        </MenuTheme>
+      </ContainerMenuTheme>
+    </ThemeProvider>
   );
 };
 

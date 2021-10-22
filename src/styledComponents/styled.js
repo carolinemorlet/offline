@@ -43,3 +43,9 @@ export const CloseMenuTheme = styled.button`
 export const ModeList = styled.ul`
   margin-top: 20px;
 `;
+
+export const Btn = styled.button`
+  padding: 15px;
+  border: none;
+  margin: 12px;
+`;
