@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
 import ThemeAction from '../redux/actions/ThemeAction';
-import { ThemeProvider } from 'styled-components';
+
 import { useDarkMode } from './useDarkMode';
 import {
   MenuTheme,
@@ -12,11 +12,8 @@ import {
   ContainerMenuTheme,
   Btn,
 } from '../styledComponents/styled';
-import {
-  darkTheme,
-  GlobalStyles,
-  lightTheme,
-} from '../styledComponents/themeStyle';
+import { GlobalStyles } from '../styledComponents/themeStyle';
+import ThemeReducer from '../redux/reducers/ThemeReducer';
 
 const color_settings = [
   {
@@ -66,7 +63,7 @@ const clickOutsideRef = (content_ref, toggle_ref) => {
 };
 
 const ThemeMenu = () => {
-  const [currMode, switchTheme] = useDarkMode();
+  const [currMode, DarkThemeProvider, ChoiceColor] = useDarkMode();
   const menu_ref = useRef(null);
   const menu_toggle_ref = useRef(null);
   const [currColor, setcurrColor] = useState('blue');
@@ -104,42 +101,47 @@ const ThemeMenu = () => {
   // );
 
   return (
-    <ThemeProvider theme={currMode === 'light' ? lightTheme : darkTheme}>
+    <div>
       <GlobalStyles />
-      <ContainerMenuTheme>
-        <CustomizeButton ref={menu_toggle_ref} onClick={() => setActiveMenu()}>
-          <i className="fa-solid fa-palette"></i>
-        </CustomizeButton>
-        <MenuTheme ref={menu_ref} className="active">
-          <h4>Theme settings</h4>
-          <CloseMenuTheme onClick={() => closeMenu()}>
-            <i className="fa-solid fa-xmark"></i>
-          </CloseMenuTheme>
-          <div className="select">
-            <span>Choose mode</span>
-            <h4>{currMode === 'light' ? 'lightTheme' : 'darkTheme'}</h4>
-            <Btn theme={currMode} switchTheme={switchTheme}></Btn>
-          </div>
-          <div className="theme-menu__select">
-            <span>Choose color</span>
-            <ModeList>
-              {color_settings.map((item, index) => (
-                <li key={index} onClick={() => setColor(item)}>
-                  <div
-                    className={`mode-list__color ${item.background} ${
-                      item.id === currColor ? 'active' : ''
-                    }`}
-                  >
-                    <i className="bx bx-check"></i>
-                  </div>
-                  <span>{item.name}</span>
-                </li>
-              ))}
-            </ModeList>
-          </div>
-        </MenuTheme>
-      </ContainerMenuTheme>
-    </ThemeProvider>
+      <DarkThemeProvider>
+        <ContainerMenuTheme>
+          <CustomizeButton
+            ref={menu_toggle_ref}
+            onClick={() => setActiveMenu()}
+          >
+            <i className="fa-solid fa-palette"></i>
+          </CustomizeButton>
+          <MenuTheme ref={menu_ref} className="active">
+            <h4>Theme settings</h4>
+            <CloseMenuTheme onClick={() => closeMenu()}>
+              <i className="fa-solid fa-xmark"></i>
+            </CloseMenuTheme>
+            <div className="select">
+              <span>Choose mode</span>
+              {/* <h4>{currMode === 'light' ? 'lightTheme' : 'darkTheme'}</h4> */}
+              <Btn theme={ThemeReducer} switchTheme={DarkThemeProvider}></Btn>
+            </div>
+            <div className="theme-menu__select">
+              <span>Choose color</span>
+              <ModeList>
+                {color_settings.map((item, index) => (
+                  <li key={index} onClick={() => setColor(item)}>
+                    <div
+                      className={`mode-list__color ${item.background} ${
+                        item.id === currColor ? 'active' : ''
+                      }`}
+                    >
+                      <i className="bx bx-check"></i>
+                    </div>
+                    <span>{item.name}</span>
+                  </li>
+                ))}
+              </ModeList>
+            </div>
+          </MenuTheme>
+        </ContainerMenuTheme>
+      </DarkThemeProvider>
+    </div>
   );
 };
 

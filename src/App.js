@@ -1,33 +1,43 @@
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
+// import { ThemeProvider } from 'styled-components';
+// import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import './App.css';
 import Grid from './Grid';
-import Home from './Home';
-import { darkTheme, lightTheme } from './styledComponents/themeStyle';
+// import Home from './Home';
+// import { darkTheme, lightTheme } from './styledComponents/themeStyle';
 import ThemeMenu from './thememenu/ThemeMenu';
 import { useDarkMode } from './thememenu/useDarkMode';
 
 function App() {
-  const [currMode] = useDarkMode();
+  const { DarkThemeProvider, ChoiceColor } = useDarkMode();
+  // const [currMode] = useDarkMode();
 
-  let themeReducer =
-    useSelector((state) => state.ThemeReducer.mode) ||
-    localStorage.getItem('theme');
-  let colorMode =
-    useSelector((state) => state.ThemeReducer.color) ||
-    localStorage.getItem('colorMode');
+  // let themeReducer =
+  //   useSelector((state) => state.ThemeReducer.mode) ||
+  //   localStorage.getItem('theme');
+  // let colorMode =
+  //   useSelector((state) => state.ThemeReducer.color) ||
+  //   localStorage.getItem('colorMode');
 
   return (
-    <div
-      className="App"
-      style={{
-        backgroundColor: themeReducer === currMode ? darkTheme : lightTheme,
-      }}
-    >
-      <ThemeMenu />
-      {/* <Home /> */}
-      <Grid themeReducer={themeReducer} colorMode={colorMode} />
-    </div>
+    <ThemeProvider theme={{ theme: 'light' }}>
+      <div
+        className="App"
+        // style={{
+        //   backgroundColor: ThemeReducer === currMode ? 'light' : 'dark',
+        // }}
+      >
+        <ThemeMenu theme={DarkThemeProvider} />
+        {/* <Home /> */}
+        <Grid colorMode={ChoiceColor} />
+      </div>
+    </ThemeProvider>
   );
 }
 
 export default App;
+
+{
+  /* <ThemeProvider theme = {{theme : darkThemeenabled ? "dark" : "light"}}></ThemeProvider> */
+}
