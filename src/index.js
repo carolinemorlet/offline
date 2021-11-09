@@ -12,18 +12,17 @@ import './css/index.css';
 import './css/grid.css';
 import './css/theme.css';
 import reportWebVitals from './reportWebVitals';
-
-const store = createStore(rootReducer);
+import store from './redux/reducers/index.js';
 
 document.title = 'GxP Manager';
 
 ReactDOM.render(
-	<Provider store={store}>
-		<React.StrictMode>
-			<App />
-		</React.StrictMode>
-	</Provider>,
-	document.getElementById('root')
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>,
+  document.getElementById('root')
 );
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
